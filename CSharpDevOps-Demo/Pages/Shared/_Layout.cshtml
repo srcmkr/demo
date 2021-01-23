@@ -1,0 +1,16 @@
+﻿@using CSharpDevOps_Demo.Lib
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Demo - CSharpDevOps</title>
+    <link rel="stylesheet" href="~/Demo.css" />
+</head>
+<body style="background-color: @EnvHelper.GetEnvironmentVariable("COLOR");">
+    
+    @RenderBody()
+
+</body>
+</html>
