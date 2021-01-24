@@ -1,1 +1,1 @@
-kubernetesDeploy configs: 'deployment.yml', dockerCredentials: [[credentialsId: 'harborcreds', url: 'https://devops.d3v.to']], kubeConfig: [path: ''], kubeconfigId: 'k8s-config', secretName: '', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://']
+
