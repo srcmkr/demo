@@ -28,9 +28,9 @@ pipeline {
     }
     stage('Deploy on kubernetes') {
 	    steps {
-	   withKubeConfig([credentialsId: 'k8s-config', serverUrl: 'https://d3v.to']) {
-           sh 'kubectl apply -f deployment.yml'
-        }
+	   kubernetes {
+      yamlFile 'deployment.yml'
+    }
 	    }
      }
   }
