@@ -20,7 +20,7 @@ pipeline {
     stage('Deploy Image') {
       steps{
         script {
-          docker.withRegistry( 'https://devops.d3v.to', 'haborcreds' ) {
+          docker.withRegistry( 'https://devops.d3v.to', 'harborcreds' ) {
             dockerImage.push()
           }
         }
