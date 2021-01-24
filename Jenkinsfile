@@ -1,13 +1,13 @@
 pipeline {
   environment {
-    registry = "username/repository"
+    registry = "demo/demo"
     dockerImage = ''
   }
   agent any
   stages {
     stage('Cloning Git') {
       steps {
-        git branch: 'master', credentialsId: 'gitcred', url: 'https://github.com/<url>.git'
+        git branch: 'master', credentialsId: 'gitcreds', url: 'https://github.com/srcmkr/demo.git'
       }
     }
     stage('Building image') {
@@ -20,7 +20,7 @@ pipeline {
     stage('Deploy Image') {
       steps{
         script {
-          docker.withRegistry( 'https://d3v.to', 'haborcred' ) {
+          docker.withRegistry( 'https://devops.d3v.to', 'haborcreds' ) {
             dockerImage.push()
           }
         }
@@ -29,11 +29,11 @@ pipeline {
 	stage('Deploy on kubernetes') {
 		steps {
 			kubernetesDeploy(
-				kubeconfigId: 'k8s-default-namespace-config-id',
+				kubeconfigId: 'k8s-config',
 				configs: 'deployment.yml',
 				enableConfigSubstitution: true
-			  )
-		  }
-	  }
+			)
+		}
+	}
   }
 }
