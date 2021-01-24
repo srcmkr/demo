@@ -26,14 +26,10 @@ pipeline {
         }
       }
     }
-	stage('Deploy on kubernetes') {
-		steps {
-			kubernetesDeploy(
-				kubeconfigId: 'k8s-config',
-				configs: 'deployment.yml',
-				enableConfigSubstitution: true
-			)
-		}
-	}
+    stage('Deploy on kubernetes') {
+	   withKubeConfig([credentialsId: 'k8s-config', serverUrl: 'https://d3v.to']) {
+           sh 'kubectl apply -f deployment.yml'
+        }
+     }
   }
 }
