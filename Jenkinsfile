@@ -27,43 +27,11 @@ pipeline {
       }
     }
     stage('Deploy on kubernetes') {
-      steps {
-	  yaml """
-	  apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: csharpdevops1-deployment
-  labels:
-    app: csharpdevops1
-    role: rolling-update
-spec:
-  replicas: 4
-  selector:
-    matchLabels:
-      app: csharpdevops1
-  revisionHistoryLimit: 2
-  strategy:
-    type: RollingUpdate
-  template:
-    metadata:
-      labels:
-        app: csharpdevops1
-    spec:
-      containers:
-      - name: csharpdevops1
-        image: srcmkr/csharpdevopsdemo:${currentBuild.number}
-        imagePullPolicy: Always
-        env:
-        - name: COLOR
-          value: "#243554"
-        ports:
-        - containerPort: 80
-        readinessProbe:
-          httpGet:
-            path: /
-            port: 80
-    """
-       }
+	    steps {
+	   kubernetes {
+      yamlFile 'deployment.yml'
+    }
+	    }
      }
   }
 }
