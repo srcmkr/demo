@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: csharpdevops1
-        image: srcmkr/csharpdevopsdemo
+        image: srcmkr/csharpdevopsdemo:${BUILD_NUMBER}
         imagePullPolicy: Always
         env:
         - name: COLOR
